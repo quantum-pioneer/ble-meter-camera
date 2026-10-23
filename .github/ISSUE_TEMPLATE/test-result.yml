@@ -1,0 +1,33 @@
+name: Share a test result
+description: Record a successful, failed or interrupted bench test.
+title: "[Test] "
+body:
+  - type: markdown
+    attributes:
+      value: "Please redact all credentials, addresses, device identities and identifying photos. A failed test is useful evidence."
+  - type: textarea
+    id: setup
+    attributes:
+      label: Hardware and software
+      description: Camera/sensor, proxy, firmware revision, receiver version, power/cable, antenna and test subject.
+    validations:
+      required: true
+  - type: textarea
+    id: method
+    attributes:
+      label: Procedure and controls
+      description: Cold power-on or reset-assisted? Any deliberate proxy restart? How many expected schedule slots?
+    validations:
+      required: true
+  - type: textarea
+    id: measurements
+    attributes:
+      label: Measured result
+      description: Complete new images received, missed slots, dimensions/bytes, checksum/decode/SD status, phase timings and explicit timezone. Separate attempted vs skipped slots.
+    validations:
+      required: true
+  - type: textarea
+    id: interpretation
+    attributes:
+      label: Interpretation and uncertainty
+      description: What did this prove, what is still unknown, and was it repeated?

@@ -1,0 +1,15 @@
+{
+  "domain": "ble_meter_camera",
+  "name": "BLE Meter Camera",
+  "version": "0.5.12",
+  "config_flow": true,
+  "documentation": "https://contributors.home-assistant.io/core/integrations/bluetooth/",
+  "dependencies": [
+    "bluetooth",
+    "bluetooth_adapters",
+    "esphome"
+  ],
+  "iot_class": "local_polling",
+  "integration_type": "device",
+  "codeowners": []
+}

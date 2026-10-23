@@ -1,0 +1,49 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "BLE meter camera",
+        "description": "Use the dedicated XIAO ESP32-C6 active ESPHome Bluetooth proxy source. Collection starts disabled on first setup. The integration pins and verifies this route before image traffic.",
+        "data": {
+          "address": "Camera BLE MAC address",
+          "proxy_source": "Dedicated XIAO ESP32-C6 Bluetooth scanner source MAC"
+        }
+      }
+    },
+    "error": {
+      "invalid_mac": "Use a Bluetooth MAC address with six colon-separated pairs.",
+      "invalid_capture_light": "Use a whole percentage from 0 to 25 for the capture light."
+    },
+    "abort": {
+      "already_configured": "This camera is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Local image transfer and storage",
+        "description": "Collection controls survive reload/restart. TEST PHOTO stops permanently at October 24, 2026, 14:25 America/Chicago. Images remain private in Home Assistant .storage.",
+        "data": {
+          "address": "Camera BLE MAC address",
+          "proxy_source": "Dedicated XIAO ESP32-C6 Bluetooth scanner source MAC",
+          "interval": "Wall-clock snapshot interval (900 seconds = :00/:15/:30/:45 America/Chicago)",
+          "frame_size": "Frame code (5 QVGA, 8 VGA, 9 SVGA, 10 XGA, 12 SXGA, 13 UXGA)",
+          "quality": "OV2640 JPEG quality (10 best to 40 smallest)",
+          "max_bytes": "Maximum JPEG bytes (131072 maximum)",
+          "chunk_pause": "Pause between chunks in seconds",
+          "history_days": "Test retention days (168 hours)",
+          "history_max_bytes": "Private diagnostic JPEG history size cap in bytes",
+          "capture_light_percent": "Capture light brightness (%)"
+        },
+        "data_description": {
+          "capture_light_percent": "Optional onboard light during capture only. 0 is off; maximum 25%. The camera limits it to two seconds and turns it off before image transfer."
+        }
+      }
+    },
+    "error": {
+      "address_immutable": "Remove and re-add the integration to change camera identity.",
+      "invalid_mac": "Use a Bluetooth MAC address with six colon-separated pairs.",
+      "invalid_capture_light": "Use a whole percentage from 0 to 25 for the capture light."
+    }
+  }
+}

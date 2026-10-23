@@ -1,0 +1,67 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "BLE meter camera",
+        "description": "Use the dedicated XIAO ESP32-C6 active ESPHome Bluetooth proxy source. Collection starts disabled on first setup. The integration pins and verifies this route before image traffic.",
+        "data": {
+          "address": "Camera BLE MAC address",
+          "proxy_source": "Dedicated XIAO ESP32-C6 Bluetooth scanner source MAC"
+        }
+      },
+      "reconfigure": {
+        "title": "Replace meter-camera hardware",
+        "description": "Keep this entry, entities, dashboard, history and test cutoff. Turn both collection switches off and wait for disconnect before changing cameras. Verify the new camera BLE address independently. The dedicated C6 stays unchanged. XIAO ESP32-S3 Sense OV3660 requires capture light 0. Retained older photos keep their original metadata.",
+        "data": {
+          "address": "Verified replacement camera BLE MAC address",
+          "camera_model": "Camera hardware model",
+          "capture_light_percent": "Capture light percentage (S3 Sense requires 0)"
+        }
+      }
+    },
+    "error": {
+      "invalid_mac": "Use a Bluetooth MAC address with six colon-separated pairs.",
+      "invalid_capture_light": "Use a whole percentage from 0 to 25 for the capture light.",
+      "invalid_reconfigure": "Use a supported camera model and a whole light percentage from 0 to 25.",
+      "proxy_immutable": "The dedicated C6 source cannot be changed in this camera replacement flow.",
+      "camera_is_proxy": "The camera address cannot be the dedicated C6 source address.",
+      "s3_light_must_be_off": "XIAO ESP32-S3 Sense OV3660 has no configured capture flash; set the capture light to 0.",
+      "receiver_not_loaded": "Load the existing meter-camera entry before replacing its camera.",
+      "collection_must_be_off": "Turn both image collection and periodic collection off first.",
+      "client_must_be_closed": "Wait for all transfers and SD maintenance to finish and confirm disconnect cleanup.",
+      "entry_changed": "The entry or runtime changed during replacement; restart this reconfigure flow."
+    },
+    "abort": {
+      "already_configured": "This camera is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Local image transfer and storage",
+        "description": "Collection controls survive reload/restart. TEST PHOTO stops permanently at October 24, 2026, 14:25 America/Chicago. Images remain private in the project .cache storage.",
+        "data": {
+          "address": "Camera BLE MAC address",
+          "proxy_source": "Dedicated XIAO ESP32-C6 Bluetooth scanner source MAC",
+          "interval": "Wall-clock snapshot interval (900 seconds = :00/:15/:30/:45 America/Chicago)",
+          "frame_size": "Frame code (5 QVGA, 8 VGA, 9 SVGA, 10 XGA, 12 SXGA, 13 UXGA)",
+          "quality": "JPEG quality (10 best to 40 smallest)",
+          "max_bytes": "Maximum JPEG bytes (131072 maximum)",
+          "chunk_pause": "Pause between chunks in seconds",
+          "history_days": "Test retention days (168 hours)",
+          "history_max_bytes": "Private diagnostic JPEG history size cap in bytes",
+          "capture_light_percent": "Capture light brightness (%)"
+        },
+        "data_description": {
+          "capture_light_percent": "Optional onboard light during capture only. 0 is off; maximum 25%. The camera limits it to two seconds and turns it off before image transfer."
+        }
+      }
+    },
+    "error": {
+      "address_immutable": "Use the integration Reconfigure action to replace camera hardware while preserving this entry.",
+      "invalid_mac": "Use a Bluetooth MAC address with six colon-separated pairs.",
+      "invalid_capture_light": "Use a whole percentage from 0 to 25 for the capture light.",
+      "s3_light_must_be_off": "XIAO ESP32-S3 Sense OV3660 has no configured capture flash; set the capture light to 0."
+    }
+  }
+}

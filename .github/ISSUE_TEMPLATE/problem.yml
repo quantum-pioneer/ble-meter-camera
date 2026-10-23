@@ -1,0 +1,33 @@
+name: Report a problem
+description: Explain where a capture, transfer, startup or maintenance operation failed.
+title: "[Problem] "
+body:
+  - type: markdown
+    attributes:
+      value: "Use redacted excerpts. Never attach a full HA backup, credentials, real device addresses or meter identifiers."
+  - type: textarea
+    id: versions
+    attributes:
+      label: Hardware and exact versions
+      description: Camera/sensor, proxy, firmware commit and HA receiver version.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps and expected behavior
+      description: Include power/reset conditions and whether this is a historical-cutoff stop.
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: Actual behavior and failure phase
+      description: Advertising, connect, CONFIG, BUSY/READY, chunk read, SD commit, persistence, ACK or background maintenance? Is the visible photo new? Did boot/uptime change?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Redacted evidence
+      description: Timings, complete error class, expected/received slots and cleanup state. Label hypotheses separately.

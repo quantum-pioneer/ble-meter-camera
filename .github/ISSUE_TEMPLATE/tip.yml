@@ -1,0 +1,27 @@
+name: Share a tip or proposal
+description: Suggest a practical improvement or explain a possible cause.
+title: "[Tip] "
+body:
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggestion and problem it addresses
+    validations:
+      required: true
+  - type: dropdown
+    id: tested
+    attributes:
+      label: Evidence level
+      options:
+        - Untested idea
+        - Source review or simulation
+        - Physical test on the documented Bluetooth proxy route
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence, tradeoffs and verification steps
+      description: Include board/version applicability. Redact private data and link any primary technical references.
+    validations:
+      required: true

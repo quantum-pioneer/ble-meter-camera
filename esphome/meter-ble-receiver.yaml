@@ -1,0 +1,78 @@
+# CURRENT OPERATOR TEMPLATE — dedicated XIAO ESP32-C6 Bluetooth proxy.
+# Matches the antenna LOW setup and other operating parameters deployed 2026-10-22.
+# Supply the existing private credentials through a local secrets.yaml file;
+# secrets.example.yaml contains placeholders only. Do not publish real secrets.
+# This redacted template is not the exact private YAML/config hash or a binary.
+# GPIO3 LOW enables the RF switch; GPIO14 LOW selects the onboard antenna.
+# Nonentity outputs initialize at priority 800; on_boot 700 reasserts before BLE/Wi-Fi.
+
+esphome:
+  name: meter-ble-receiver
+  friendly_name: Meter BLE Receiver
+  min_version: 2026.9.1
+  name_add_mac_suffix: false
+  on_boot:
+    priority: 700
+    then:
+    - output.turn_off: rf_switch_power
+    - output.turn_off: rf_internal_antenna
+esp32:
+  board: seeed_xiao_esp32c6
+  variant: esp32c6
+  flash_size: 4MB
+  framework:
+    type: esp-idf
+    version: 5.5.5
+logger:
+  hardware_uart: USB_SERIAL_JTAG
+  level: INFO
+  logs:
+    esp32_ble_tracker: WARN
+api:
+  encryption:
+    key: !secret 'api_encryption_key'
+  reboot_timeout: 0s
+ota:
+- platform: esphome
+  encryption: null
+wifi:
+  ssid: !secret 'wifi_ssid'
+  password: !secret 'wifi_password'
+  power_save_mode: none
+  reboot_timeout: 0s
+esp32_ble_tracker:
+  scan_parameters:
+    active: false
+bluetooth_proxy:
+  active: true
+  connection_slots: 1
+debug:
+  update_interval: 30s
+binary_sensor:
+- platform: status
+  name: Status
+sensor:
+- platform: uptime
+  name: Uptime
+  update_interval: 30s
+- platform: wifi_signal
+  name: Wi-Fi RSSI
+  update_interval: 30s
+  entity_category: diagnostic
+- platform: debug
+  free:
+    name: Free Heap
+  min_free:
+    name: Minimum Free Heap
+  loop_time:
+    name: Main Loop Time
+text_sensor:
+- platform: version
+  name: ESPHome Version
+output:
+- platform: gpio
+  id: rf_switch_power
+  pin: GPIO3
+- platform: gpio
+  id: rf_internal_antenna
+  pin: GPIO14

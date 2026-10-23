@@ -1,0 +1,17 @@
+set_mode:
+  name: Set meter camera mode
+  description: Explicitly select TEST_PHOTO or METER. Stops collection first and never enables it automatically. The expired calendar test cannot restart.
+  fields:
+    entry_id:
+      name: Configuration entry ID
+      required: false
+      selector:
+        text:
+    mode:
+      name: Mode
+      required: true
+      selector:
+        select:
+          options:
+            - TEST_PHOTO
+            - METER
